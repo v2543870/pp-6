@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  main.container
+    h1 Список справ
+
+    //- Форма додавання нової задачі (відправляється через Fetch API)
+    form#task-form(novalidate)
+      input#title(type='text', name='title', placeholder='Нова задача...', autocomplete='off')
+      button(type='submit') Додати
+
+    ul#task-list
+      each task in tasks
+        li(data-id=task.id, class=task.completed ? 'done' : '')
+          span.title= task.title
+          .actions
+            button.toggle-btn(type='button')= task.completed ? 'Відновити' : 'Виконано'
+            button.delete-btn(type='button') Видалити
